@@ -31,7 +31,10 @@ public class Main : NetworkBehaviour {
         DebugStart();
 
     }
-    
+
+     
+
+
     private void DebugStart(){
         if(GameData.dbgRun.startMode == DebugRunner.StartModes.HOST){
             string startMsg = $"Starting as {GameData.dbgRun.startMode} with scene{GameData.dbgRun.startScene}";
@@ -112,6 +115,15 @@ public class Main : NetworkBehaviour {
 
 
 
+    public override void OnDestroy()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            OnDisconnect();
+            return;
+        }
+        
+    }
 
 
     private void OnHostClicked() {

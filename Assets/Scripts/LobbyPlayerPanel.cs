@@ -50,6 +50,6 @@ public class LobbyPlayerPanel : MonoBehaviour
 
     public void ShowKick(bool k)
     {   
-        btnKick.enabled = k;
+        btnKick.gameObject.SetActive(k);
     }
 }
