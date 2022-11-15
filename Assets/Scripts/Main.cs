@@ -115,15 +115,7 @@ public class Main : NetworkBehaviour {
 
 
 
-    public override void OnDestroy()
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            OnDisconnect();
-            return;
-        }
-        
-    }
+
 
 
     private void OnHostClicked() {
@@ -138,6 +130,15 @@ public class Main : NetworkBehaviour {
         btnHost.gameObject.SetActive(false);
         txtStatus.text = "Waiting on Host";
         NetworkManager.Singleton.StartClient();
+    }
+
+
+    public override void OnDestroy()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnDisconnect;
+        }
     }
 
     private void OnDisconnect(ulong clientId) {
